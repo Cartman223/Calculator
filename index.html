@@ -6,26 +6,31 @@
     <title>myCalculator</title>
 </head>
 <body>
-    <script>
-        function add(operand1, operand2) {
-            return operand1 + operand2
-        };
 
-        function sub(operand1, operand2) {
-            return operand1 - operand2
-        };
+    <div style="background-color:gray;color:blue" class="display">0</div>
 
-        function times(operand1, operand2) {
-            return operand1 * operand2
-        };
+    <div class="numberpad">
+        <button>0</button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+    </div>
+    <div class="operators">
+        <button>+</button>
+        <button>-</button>
+        <button>x</button>
+        <button>÷</button>
+        <button>=</button>
+        <button>C</button>
+    </div>
+       
 
-        function divide(operand1, operand2) {
-            return operand1 / operand2
-        };
-
-        function operate(operator, operand1, operand2) {
-            return operator(operand1, operand2)
-        };
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
