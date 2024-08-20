@@ -33,13 +33,16 @@ numbers.forEach((number) => {
             operand2 = +display.textContent;
           } else if (operand2) {
             display.textContent += number.textContent;
-            operand2 += +display.textContent;
+            operand2 = +display.textContent;
           };
         } else {
             if (display.textContent == 0 && number.textContent == 0) {
                 display.textContent = "";
                 display.textContent = number.textContent;
             } else {
+                if (display.textContent === "0") {
+                    display.textContent = "";
+                };
                 display.textContent += number.textContent;
             };
         };
@@ -48,7 +51,7 @@ numbers.forEach((number) => {
 
 // getting operands from the display
 
-let operator, operand1, operand2; // will get an assigned value when the user clicks a button
+let operator, operand1, operand2, result; // will get an assigned value when the user clicks a button
 
 const operators = document.querySelectorAll(".operator");
 operators.forEach((op) => {
@@ -85,8 +88,10 @@ document.querySelector(".divide").addEventListener('click', () => {
 // handling the equals sign
 const equals = document.querySelector(".equal");
 equals.addEventListener('click', () => {
-    operand2 = +display.textContent;
-    display.textContent = "";
+    if (!operand2) {
+        operand2 = +display.textContent;
+        display.textContent = "";
+    };
     console.log(operand1);
     console.log(operand2);
     console.log(operator);
@@ -94,10 +99,14 @@ equals.addEventListener('click', () => {
     // checks for divide by 0 operation and print a snarky response to the display
     if (operand2 === 0 && operator === divide) {
         display.textContent = "don't be silly";
-    } 
-    else if (operator && operand1 && operand2) { // makes sure all the required variables are defined before evaluating the expression
+    } else if (result === +display.textContent && operator && operand1 && operand2) {
+        operand1 = result;
+        display.textContent = operate(operator, operand1, operand2);
+        result = +display.textContent;
+    } else if (operator && operand1 && operand2) { // makes sure all the required variables are defined before evaluating the expression
         // here we are evaluating the expression input by the user and then printing the result to the display
         display.textContent = operate(operator, operand1, operand2);
+        result = +display.textContent;
     };
 });
 
@@ -108,6 +117,7 @@ document.querySelector(".clear").addEventListener('click', () => {
     operand1 = undefined;
     operand2 = undefined;
     operator = undefined;
+    result = undefined;
 });
 
 
