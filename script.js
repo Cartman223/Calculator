@@ -18,6 +18,18 @@ function operate(operator, operand1, operand2) {
     return operator(operand1, operand2)
 };
 
+function roundLongDecimals(number) {
+    const isLongDecimal = number.toString().split(".")[1];
+
+    if (isLongDecimal) {
+        if (isLongDecimal.length > 14) {
+            return number.toFixed(14)
+        } else return number
+    } else return number
+};
+
+let operator, operand1, operand2, result; // will get an assigned value when the user clicks a button
+
 // function that populate the display when you
 // click the number buttons
 const numbers = document.querySelectorAll(".number");
@@ -26,6 +38,10 @@ let display = document.querySelector(".display");
 
 numbers.forEach((number) => {
     number.addEventListener('click', () => {
+        if (result) {
+            display.textContent = "";
+            result = undefined;
+        };
         if (operand1 && operator) {
           if(!operand2) {
             display.textContent = "";
@@ -36,7 +52,7 @@ numbers.forEach((number) => {
             operand2 = +display.textContent;
           };
         } else {
-            if (display.textContent == 0 && number.textContent == 0) {
+            if (display.textContent === "0" && number.textContent === "0") {
                 display.textContent = "";
                 display.textContent = number.textContent;
             } else {
@@ -51,8 +67,6 @@ numbers.forEach((number) => {
 
 // getting operands from the display
 
-let operator, operand1, operand2, result; // will get an assigned value when the user clicks a button
-
 const operators = document.querySelectorAll(".operator");
 operators.forEach((op) => {
     op.addEventListener('click', () => {
@@ -65,9 +79,13 @@ operators.forEach((op) => {
             console.log(operand1);
             console.log(operand2);
             console.log(operator);
-            display.textContent = operate(operator, operand1, operand2);
+            result = operate(operator, operand1, operand2);
+            display.textContent = roundLongDecimals(result);
+            operand1 = result;
+            operand2 = undefined;
+        } else {
+            operand1 = +display.textContent; 
         };
-        operand1 = +display.textContent; 
     });
 });
 
@@ -101,13 +119,18 @@ equals.addEventListener('click', () => {
         display.textContent = "don't be silly";
     } else if (result === +display.textContent && operator && operand1 && operand2) {
         operand1 = result;
-        display.textContent = operate(operator, operand1, operand2);
+        result = operate(operator, operand1, operand2);
+        display.textContent = roundLongDecimals(result);
         result = +display.textContent;
     } else if (operator && operand1 && operand2) { // makes sure all the required variables are defined before evaluating the expression
         // here we are evaluating the expression input by the user and then printing the result to the display
-        display.textContent = operate(operator, operand1, operand2);
-        result = +display.textContent;
+        result = operate(operator, operand1, operand2);
+        display.textContent = roundLongDecimals(result);
+        operand1 = undefined;
     };
+
+
+    // rounding up the display
 });
 
 // the clear function
