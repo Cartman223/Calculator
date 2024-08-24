@@ -38,11 +38,18 @@ let display = document.querySelector(".display");
 
 numbers.forEach((number) => {
     number.addEventListener('click', () => {
+
+        if (display.textContent.length >= 16) {
+            display.textContent = "";
+        };
+
         if (result) {
             display.textContent = "";
             result = undefined;
         };
+
         if (operand1 && operator) {
+
           if(!operand2) {
             display.textContent = "";
             display.textContent = number.textContent;
@@ -51,7 +58,9 @@ numbers.forEach((number) => {
             display.textContent += number.textContent;
             operand2 = +display.textContent;
           };
+
         } else {
+
             if (display.textContent === "0" && number.textContent === "0") {
                 display.textContent = "";
                 display.textContent = number.textContent;
