@@ -136,6 +136,7 @@ equals.addEventListener('click', () => {
         result = operate(operator, operand1, operand2);
         display.textContent = roundLongDecimals(result);
         operand1 = undefined;
+        operand2 = undefined;
     };
 
 
