@@ -19,7 +19,7 @@ body {
     justify-content: center;
     align-self: center;
     text-align: center;
-    font-size: 30px;
+    font-size: 4vh;
     width: 350px;
     height: 50px;
     margin-bottom: 10px;
@@ -29,6 +29,7 @@ body {
 
 .numberpad > button {
     padding: 5px;
+    margin-bottom: 10px;
     font-size: 20px;
     background-color: #a2bbcf;
     color: white;
@@ -40,6 +41,24 @@ body {
     background-color: #205b7a;
 }
 
+.operators > .add {
+    background-color: #49a109;
+    color: #a17944;
+}
+
+.operators > .sub, .times, .divide {
+    color: #a2bbcf;
+}
+
 .operators > .equal {
+    height: 45px;
+    margin-left: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
     background-color: #ce1c44;
+}
+
+.operators > .clear {
+    background-color: #a17944;
+    color: #000000;
 }
